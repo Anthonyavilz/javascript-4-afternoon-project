@@ -30,6 +30,19 @@
 */
 
 //Code Here
+class Employee{
+  constructor(first_name, last_name, email, age) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+    this.makeWidget = () => {
+      return `${this.first_name} ${this.last_name} Widget`;
+    }
+  }
+}
+
+// let newEmployee = new Employee('Phillip', 'Avila');
 
 
 ////////// PROBLEM 2 //////////
@@ -49,7 +62,19 @@
 
 //Code Here
 
-
+class Manager extends Employee {
+  constructor(first_name, last_name, email, age) {
+    super(first_name, last_name, email, age);
+    this.reports = [];
+    }
+    hire = (Employee) => {
+      this.reports.push(Employee);
+    }
+    fire = (Employee) => {
+      this.reports.splice(Employee, 1);
+    }
+  }    
+ 
 ////////// PROBLEM 3 //////////
 
 /*
@@ -72,6 +97,42 @@
 */
 
 //Code Here
+
+class ProgressiveManager extends Manager {
+  constructor(first_name, last_name, email, age){
+    super(first_name, last_name, email, age);
+    this.title = 'Not a manager'
+    this.bonus = 0
+  }
+    hire = (Employee) => {
+      this.reports.push(Employee)
+      this.title = this.reports===0 ? 'Not a manager'
+       :this.reports.length <=3 ? 'Barely Manager'
+       :this.reports.length <=10 ? 'Mostly Manager'
+       :this.reports.length <=50 ? 'Manager'
+       :this.reports.length <=100 ? 'Manager Plus'
+       :'Bestest Manager'
+
+
+      // if (this.reports === 0){
+      //   this.title = 'Not a Manager'
+      // } else if (this.reports.length <= 3){
+      //   this.reports = 'Barely Manager'
+      // } else if (this.reports.length <= 10){
+      //   this.reports = 'Mostly Manager'
+      // } else if (this.reports.length <= 50){
+      //   this.reports = 'Manager'
+      // } else if (this.reports.length <= 100){
+      //   this.reports = 'Manager Plus'
+      // } else if (this.reports.length >= 101){
+      //   this.reports = 'Bestest Manager'
+      // }
+    }
+    fire = (Employee) => {
+      this.reports.splice(Employee, 1);
+      this.bonus += 100
+    }
+}
 
 
 
